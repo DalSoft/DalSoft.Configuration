@@ -59,7 +59,7 @@ This would work fine
   </appSettings>
 ```
 
-A call to MyAppConfig.GetSettings().DatabaseConnectionString; would return "Server=myServerAddress;Database=myDataBase;Trusted_Connection=True;".
+> A call to MyAppConfig.GetSettings().DatabaseConnectionString; would return "Server=myServerAddress;Database=myDataBase;Trusted_Connection=True;".
 And a call to MyAppConfig.GetSettings().Website; would return null.
 
 #Composition
@@ -99,10 +99,63 @@ Example config:
   </appSettings>
 ```
 
-A call to MyAppConfig.GetSettings().SmtpConfig.Host; would return "smtp.google.com".
+> A call to MyAppConfig.GetSettings().SmtpConfig.Host; would return "smtp.google.com".
 
 
+## Complex Types 
 
+JsonConfig supports the same types as Json.NET http://james.newtonking.com/json/help/index.html?topic=html/SerializationGuide.htm IList, IEnumerable, IList<T>, Array, IDictionary, IDictionary<TKey, TValue> etc.
+
+### List example
+
+Lets take our previous example but now we want to support mutiple SmtpConfigs.
+
+Example JsonConfig:
+```cs
+public class MyAppConfig : JsonConfig<MyAppConfig>
+{
+  public MyAppConfig()
+  {
+    SmtpConfig = new List<SmtpConfig>();
+  }
+  
+  public string DatabaseConnectionString { get; set; }
+  public List<SmtpConfig> SmtpConfig { get; set; }
+}
+
+public class SmtpConfig
+{
+    public string Host { get; set; }
+    public string UserName { get; set; }
+    public string Password { get; set; }
+}
+```
+
+> Notice the use of null object in the constructor 
+
+Example config:
+```xml
+<appSettings>
+   <add key="MyAppConfig" value="
+    {
+        'Website': 'http://dalsoft.co.uk/',
+        'DatabaseConnectionString': 'Server=myServerAddress;Database=myDataBase;Trusted_Connection=True;',
+        'SmtpConfig': [
+        {           
+          'Host': 'smtp.google.com',           
+          'UserName':'myusername',           
+          'Password': 'mypassword'
+        },
+        {           
+          'Host': 'smtp.yahoo.com',           
+          'UserName':'myusername',           
+          'Password': 'mypassword'
+        }]
+    }" />
+  </appSettings>
+```
+
+> A call to MyAppConfig.GetSettings().SmtpConfig[1].Host; would return "smtp.yahoo.com".
 
 
 Thanks to @JamesNK for Json.Net
