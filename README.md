@@ -10,7 +10,7 @@ Works with:
 
 ## How to use
 
-Create a class derived JsonConfig  that inherits from DalSoft.Configuration.JsonConfig:
+Create a class that inherits from DalSoft.Configuration.JsonConfig:
 
 ```cs
 public class MyAppConfig : JsonConfig<MyAppConfig>
@@ -31,7 +31,7 @@ Add the following appSettings to your app or web.config:
   </appSettings>
 ```
 
-Now you can access your configuration as simple as calling GetSettings() on the class you just created for example:
+Now you can access your configuration by simply calling GetSettings() on the class you just created for example:
 ```cs
 MyAppConfig.GetSettings();
 ```
@@ -41,13 +41,13 @@ MyAppConfig.GetSettings();
 
 ## How does it work?
 
-A very simple convention JsonConfig just looks in appSettings keys for the Name of the class you pass as a generic arguement to JsonConfig. In our example JsonConfig<MyAppConfig> JsonConfig looks for <appSettings><add key="MyAppConfig"... in the config and deserializes config - that's it.
+JsonConfig has a very simple convention it just looks in appSettings keys for the Name of the class you passed as a generic arguement. In our example JsonConfig<MyAppConfig> JsonConfig looks for <appSettings><add key="MyAppConfig"... in the config and deserializes config - that's it.
 
 ## Flexiablity
 
-One of the things I like about this apporach is flexiablity. You can have just one JsonConfig class per solution or one per project it's up to you. You can even have multiple JsonConfig in the same app.config, because really they are just normal appSettings.
+One of the things I like about this apporach is flexiablity. You can have just one derived JsonConfig class per solution or one per project it's up to you. You can even have multiple JsonConfig keys in the same app.config - because really it's just normal appSettings.
 
-If you went with one JsonConiifg class per solution one of the awesome features is you only need to add the Json you need. From our example above if your project only need the DatabaseConnectionString, thats all you need to add.
+If you went with one derived JsonConfig class per solution one of the awesome features is you only need to add the Json you need. From our example above if your project only need the DatabaseConnectionString, thats all you need to add.
 
 This would work fine
 ```xml
@@ -62,11 +62,11 @@ This would work fine
 > A call to MyAppConfig.GetSettings().DatabaseConnectionString; would return "Server=myServerAddress;Database=myDataBase;Trusted_Connection=True;".
 And a call to MyAppConfig.GetSettings().Website; would return null.
 
-#Composition
+# Composition
 
 Composition is supported and encouraged for grouping your config.
 
-Example JsonConfig:
+Example derived JsonConfig class:
 ```cs
 public class MyAppConfig : JsonConfig<MyAppConfig>
 {
@@ -110,7 +110,7 @@ JsonConfig supports the same types as Json.NET http://james.newtonking.com/json/
 
 Lets take our previous example but now we want to support mutiple SmtpConfigs.
 
-Example JsonConfig:
+Example derived JsonConfig class:
 ```cs
 public class MyAppConfig : JsonConfig<MyAppConfig>
 {
@@ -131,7 +131,7 @@ public class SmtpConfig
 }
 ```
 
-> Notice the use of null object in the constructor 
+> Notice the use of null object in the constructor
 
 Example config:
 ```xml
@@ -155,14 +155,14 @@ Example config:
   </appSettings>
 ```
 
-> A call to MyAppConfig.GetSettings().SmtpConfig[1].Host; would return "smtp.yahoo.com".
+> A call to MyAppConfig.GetSettings().SmtpConfig[1].Host; would return "smtp.yahoo.com"
 
 
 ## Azure confg .cscfg files
 
 This is as easy as it gets replace <appSettings><add key="MyAppConfig" value="... with <ConfigurationSettings><Setting name="MyAppConfig" value="...
 
-Our example in using Azure ServiceConfiguration.cscfg
+Our example using Azure ServiceConfiguration.cscfg
 
 ```xml
 <ConfigurationSettings>
