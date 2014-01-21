@@ -1,6 +1,6 @@
 # DalSoft.Configuration
 
-The simplest .NET configuration that could possibly work (30 lines of code). Use Json in your .NET .config files. Use simple POCO classes for all your config.
+The simplest .NET configuration that could possibly work (30 lines of code). Use Json in your .NET config files. Use simple POCO classes for all your config.
 
 Works with:
 
@@ -10,7 +10,7 @@ Works with:
 
 ## How to use
 
-Create a config class that inherits from DalSoft.Configuration.JsonConfig:
+Create a class derived JsonConfig  that inherits from DalSoft.Configuration.JsonConfig:
 
 ```cs
 public class MyAppConfig : JsonConfig<MyAppConfig>
@@ -157,5 +157,23 @@ Example config:
 
 > A call to MyAppConfig.GetSettings().SmtpConfig[1].Host; would return "smtp.yahoo.com".
 
+
+## Azure confg .cscfg files
+
+This is as easy as it gets replace <appSettings><add key="MyAppConfig" value="... with <ConfigurationSettings><Setting name="MyAppConfig" value="...
+
+Our example in using Azure ServiceConfiguration.cscfg
+
+```xml
+<ConfigurationSettings>
+   <add name="MyAppConfig" value="
+    {
+        'Website': 'http://dalsoft.co.uk/',
+        'DatabaseConnectionString': 'Server=myServerAddress;Database=myDataBase;Trusted_Connection=True;'
+    }" />
+  </ConfigurationSettings>
+```
+
+> MyAppConfig.GetSettings().Website; will return "http://dalsoft.co.uk/"
 
 Thanks to @JamesNK for Json.Net
