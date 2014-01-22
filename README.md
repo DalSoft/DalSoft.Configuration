@@ -1,4 +1,4 @@
-# DalSoft.Configuration
+# JsonConfig
 
 The simplest .NET configuration that could possibly work (30 lines of code). Use Json in your .NET config files. Use simple POCO classes for all your config.
 
@@ -41,13 +41,15 @@ MyAppConfig.GetSettings();
 
 ## How does it work?
 
-JsonConfig has a very simple convention it just looks in appSettings keys for the Name of the class you passed as a generic arguement. In our example JsonConfig<MyAppConfig> JsonConfig looks for <appSettings><add key="MyAppConfig"... in the config and deserializes config - that's it.
+JsonConfig has a very simple convention it just looks in appSettings keys for the Name of the class you passed as a generic arguement. 
+
+In our example JsonConfig<MyAppConfig> JsonConfig looks for <appSettings><add key="MyAppConfig"... in the config and deserializes it - that's it.
 
 ## Flexiablity
 
-One of the things I like about this apporach is flexiablity. You can have just one derived JsonConfig class per solution or one per project it's up to you. You can even have multiple JsonConfig keys in the same app.config - because really it's just normal appSettings.
+One of the things I like about this apporach is flexiablity. You can have just one derived JsonConfig class per solution or one per project it's up to you. You can even have multiple JsonConfig keys in the same app.config because it just uses normal appSettings.
 
-If you went with one derived JsonConfig class per solution one of the awesome features is you only need to add the Json you need. From our example above if your project only need the DatabaseConnectionString, thats all you need to add.
+If you went with one derived JsonConfig class per solution one of the awesome features is you only need to add the Json you need. From our example above if your project only needs the DatabaseConnectionString, thats all you need to add.
 
 This would work fine
 ```xml
@@ -104,7 +106,7 @@ Example config:
 
 ## Complex Types 
 
-JsonConfig supports the same types as Json.NET http://james.newtonking.com/json/help/index.html?topic=html/SerializationGuide.htm IList, IEnumerable, IList<T>, Array, IDictionary, IDictionary<TKey, TValue> etc.
+JsonConfig supports the same types as [Json.NET](http://james.newtonking.com/json/help/index.html?topic=html/SerializationGuide.htm)  IList, IEnumerable, IList<T>, Array, IDictionary, IDictionary<TKey, TValue> etc.
 
 ### List example
 
@@ -160,7 +162,17 @@ Example config:
 
 ## Azure confg .cscfg files
 
-This is as easy as it gets replace <appSettings><add key="MyAppConfig" value="... with <ConfigurationSettings><Setting name="MyAppConfig" value="...
+This is as easy as it gets replace:
+
+```xml
+<appSettings><add key="MyAppConfig" value="... 
+```
+
+with: 
+
+```xml
+<ConfigurationSettings><Setting name="MyAppConfig" value="...
+```
 
 Our example using Azure ServiceConfiguration.cscfg
 
@@ -175,5 +187,6 @@ Our example using Azure ServiceConfiguration.cscfg
 ```
 
 > MyAppConfig.GetSettings().Website; will return "http://dalsoft.co.uk/"
+> .cscfg config settings will always take priority over app pr web.config
 
-Thanks to @JamesNK for Json.Net
+Thanks to [@JamesNK](https://twitter.com/JamesNK) for Json.Net
