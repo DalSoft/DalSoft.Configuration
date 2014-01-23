@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>DalSoft.Configuration</id>
+    <version>$version$</version>
+    <authors>DalSoft</authors>
+    <owners>DalSoft</owners>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+    <projectUrl>https://github.com/DalSoft/JsonConfig</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The simplest .NET configuration that could possibly work. Use Json in your .NET config files. Use simple POCO classes for all your config. Works with Azure ServiceConfiguration.cscfg too!</description>
+    <releaseNotes>Version 1.0.0 release</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>app.config web.config json json.net config configuration azure ServiceConfiguration.cscfg .cscfg</tags>
+  </metadata>
+</package>

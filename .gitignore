@@ -21,3 +21,6 @@ _ReSharper.*
 # DotCover
 *.dotCover
 
+#nuget
+*.nupkg
+
