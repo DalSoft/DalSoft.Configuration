@@ -1,4 +1,4 @@
-# JsonConfig
+# DalSoft.Configuration
 
 The simplest .NET configuration that could possibly work (30 lines of code). Use Json in your .NET config files. Use simple POCO classes for all your config.
 
