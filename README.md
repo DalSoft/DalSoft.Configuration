@@ -45,13 +45,13 @@ MyAppConfig.GetSettings();
 
 ## How does it work?
 
-JsonConfig has a very simple convention it just looks in appSettings keys for the Name of the class you passed as a generic arguement. 
+JsonConfig has a very simple convention it just looks in appSettings keys for the Name of the class you passed as a generic argument. 
 
 In our example JsonConfig<MyAppConfig> JsonConfig looks for <appSettings><add key="MyAppConfig"... in the config and deserializes it - that's it.
 
-## Flexiablity
+## Flexibility
 
-One of the things I like about this apporach is flexiablity. You can have just one derived JsonConfig class per solution or one per project it's up to you. You can even have multiple JsonConfig keys in the same app.config because it just uses normal appSettings.
+One of the things I like about this approach is flexibility. You can have just one derived JsonConfig class per solution or one per project it's up to you. You can even have multiple JsonConfig keys in the same app.config because it just uses normal appSettings.
 
 If you went with one derived JsonConfig class per solution one of the awesome features is you only need to add the Json you need. From our example above if your project only needs the DatabaseConnectionString, thats all you need to add.
 
