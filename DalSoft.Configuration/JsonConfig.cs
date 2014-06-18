@@ -6,10 +6,15 @@ namespace DalSoft.Configuration
 {
     public abstract class JsonConfig<TConfig> where TConfig : JsonConfig<TConfig>, new()
     {
+        private static TConfig _cachedConfig;
+        
         public static TConfig GetSettings()
         {
+            if (_cachedConfig != null) return _cachedConfig;
+            
             var name = typeof(TConfig).Name;
             var json = CloudConfigurationManager.GetSetting(name) ?? ConfigurationManager.AppSettings[name];
+            
             if (json==null)
                 throw new ConfigurationErrorsException(string.Format("{0} setting is missing from your config", name));
 
@@ -20,7 +25,8 @@ namespace DalSoft.Configuration
         {
             try
             {
-                return JsonConvert.DeserializeObject<TConfig>(json);
+                _cachedConfig = JsonConvert.DeserializeObject<TConfig>(json);
+                return _cachedConfig;
             }
             
             catch (JsonSerializationException)
