@@ -193,4 +193,12 @@ Our example using Azure ServiceConfiguration.cscfg
 > MyAppConfig.GetSettings().Website; will return "http://dalsoft.co.uk/"
 > .cscfg config settings will always take priority over app pr web.config
 
-Thanks to [@JamesNK](https://twitter.com/JamesNK) for Json.Net
+
+## IoC
+
+DalSoft.Configuration is so lightweight I sugguest injecting as is without creating any extra abstractions. You should inject by binding to ```() => MyAppConfig.GetSettings()``` directly. In your tests you can just provide the configuration required using app.config. BTW there is no reason why you can't add your own interfaces over any class derived from JsonConfig it would just be overkill. You don't need to worry about multiple calls to GetSettings() see caching below.
+
+## GetSettings() and caching
+Since version 1.0.1 after the first call to GetSettings() all subsequent calls are returned from a static field. That means you can call GetSettings() as many times as you like from the same AppDomain - and it will be as quick as it could possibly be.
+
+Made possible by [@JamesNK](https://twitter.com/JamesNK)'s Json.Net
