@@ -9,7 +9,7 @@
     <projectUrl>https://github.com/DalSoft/DalSoft.Configuration</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>The simplest .NET configuration that could possibly work. Use Json in your .NET config files. Use simple POCO classes for all your config. Works with Azure ServiceConfiguration.cscfg too!</description>
-    <releaseNotes>First call to GetSettings now cached, updated to use latest version of Json.Net.</releaseNotes>
+    <releaseNotes>Updated to use latest version of Json.Net 6.0.8</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>app.config web.config json json.net config configuration azure ServiceConfiguration.cscfg .cscfg</tags>
   </metadata>
