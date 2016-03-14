@@ -1,6 +1,6 @@
 # DalSoft.Configuration
 
-> Note ASP.NET 5 now includes this exact functionality https://weblog.west-wind.com/posts/2015/Jun/03/Strongly-typed-AppSettings-Configuration-in-ASPNET-5
+> Note ASP.NET Core 1.0 now includes this exact functionality https://weblog.west-wind.com/posts/2015/Jun/03/Strongly-typed-AppSettings-Configuration-in-ASPNET-5
 
 The simplest .NET configuration that could possibly work (30 lines of code). Use Json in your .NET config files. Use simple POCO classes for all your config.
 
